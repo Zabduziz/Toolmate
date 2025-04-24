@@ -3,4 +3,36 @@
     <string name="title_home">Downloader</string>
     <string name="title_dashboard">History</string>
     <string name="title_notifications">Updates</string>
+    <string-array name="app_names">
+        <item>Instagram</item>
+        <item>TikTok</item>
+        <item>Twitter</item>
+        <item>Facebook</item>
+        <item>Threads</item>
+        <item>Snack</item>
+        <item>Spotify</item>
+        <item>SoundCloud</item>
+        <item>Youtube</item>
+        <item>Terabox</item>
+        <item>MediaFire</item>
+        <item>Bstation</item>
+    </string-array>
+
+    <!-- Array for drawable resources for icons -->
+    <array name="app_icons">
+        <item>@drawable/ic_instagram</item>
+        <item>@drawable/ic_tiktok</item>
+        <item>@drawable/ic_twitter</item>
+        <item>@drawable/ic_facebook</item>
+        <item>@drawable/ic_threads</item>
+        <item>@drawable/ic_snack</item>
+        <item>@drawable/ic_spotify</item>
+        <item>@drawable/ic_soundcloud</item>
+        <item>@drawable/ic_youtube</item>
+        <item>@drawable/ic_terabox</item>
+        <item>@drawable/ic_mediafire</item>
+        <item>@drawable/ic_bstation</item>
+
+
+    </array>
 </resources>
