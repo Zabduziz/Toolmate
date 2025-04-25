@@ -15,10 +15,31 @@
         android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="App Name"
+        android:text="@string/app_name"
         android:textSize="24sp"
         android:layout_below="@id/imgAppIcon"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/etLink"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/Hint"
+        android:layout_below="@id/tvAppName"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:inputType="textUri"/>
+
+    <!-- Tombol Download -->
+    <Button
+        android:id="@+id/btnDownload"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="@string/Download"
+        android:layout_below="@id/etLink"
+        android:layout_marginTop="20dp"
+        android:background="#6a4e98"
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>
