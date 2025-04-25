@@ -1,5 +1,6 @@
 package com.example.toolmate
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,19 +19,21 @@ class ListAppAdapter(private val listapp: ArrayList<apps>): RecyclerView.Adapter
         return ListViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: ListViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val (img, name) = listapp[position]
         Glide.with(holder.imgapp.context)
             .load(img)
             .into(holder.imgapp)
         holder.tvName.text = name
         holder.itemView.setOnClickListener {
-            Toast.makeText(holder.itemView.context, listapp[holder.adapterPosition].name, Toast.LENGTH_SHORT).show()
+            // Kirim data ke SecondActivity saat item diklik
+            val intent = Intent(holder.itemView.context, SecondActivity::class.java)
+            intent.putExtra("APP_NAME", name)
+            intent.putExtra("APP_ICON", img)
+            holder.itemView.context.startActivity(intent)
         }
     }
+
 
     override fun getItemCount(): Int = listapp.size
 
