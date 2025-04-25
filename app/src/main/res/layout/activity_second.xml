@@ -31,7 +31,6 @@
         android:padding="10dp"
         android:inputType="textUri"/>
 
-    <!-- Tombol Download -->
     <Button
         android:id="@+id/btnDownload"
         android:layout_width="match_parent"
