@@ -54,7 +54,7 @@ class DashboardFragment : Fragment() {
 
     private fun getListApps(): ArrayList<apps> {
         val dataAppIcon = resources.getStringArray(R.array.data_apps)
-        val dataApps = resources.getStringArray(R.array.data_apps)
+        val dataApps = resources.getStringArray(R.array.data_appicons)
         val listApp = ArrayList<apps>()
         for (i in dataApps.indices) {
             val apps = apps(dataApps[i], dataAppIcon[i])
