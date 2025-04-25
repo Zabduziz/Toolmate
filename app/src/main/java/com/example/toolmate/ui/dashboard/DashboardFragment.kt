@@ -39,7 +39,7 @@ class DashboardFragment : Fragment() {
         rvApps = binding.rvApps
         rvApps.setHasFixedSize(true)
 
-        list.clear()
+
         list.addAll(getListApps())
         showRecycleList()
     }
