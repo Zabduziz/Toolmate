@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">ToolMate</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_downloader">Downloader</string>
+    <string name="title_history">History</string>
     <!-- Menu Aplikasi -->
     <string name="apps_name">Nama Aplikasi</string>
     <string name="appicons_name">Ini Gambar</string>
