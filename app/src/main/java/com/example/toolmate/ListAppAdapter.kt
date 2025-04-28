@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.toolmate.ui.downloader.DownloaderActivity
 
 
 class ListAppAdapter(private val listapp: ArrayList<apps>): RecyclerView.Adapter<ListAppAdapter.ListViewHolder>() {
@@ -27,10 +28,10 @@ class ListAppAdapter(private val listapp: ArrayList<apps>): RecyclerView.Adapter
         holder.tvName.text = name
         holder.itemView.setOnClickListener {
             // Kirim data ke SecondActivity saat item diklik
-            val intent = Intent(holder.itemView.context, SecondActivity::class.java)
-            intent.putExtra("APP_NAME", name)
-            intent.putExtra("APP_ICON", img)
-            holder.itemView.context.startActivity(intent)
+            val downloaderActicity = Intent(holder.itemView.context, DownloaderActivity::class.java)
+            downloaderActicity.putExtra(DownloaderActivity.NAME_PLATFORM, name)
+            downloaderActicity.putExtra(DownloaderActivity.LOGO_PLATFORM, img)
+            holder.itemView.context.startActivity(downloaderActicity)
         }
     }
 
