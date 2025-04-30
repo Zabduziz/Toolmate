@@ -2,18 +2,17 @@ package com.example.toolmate.ui.downloader
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.toolmate.R
-import com.example.toolmate.data.response.YoutubeResponse
-import com.example.toolmate.data.retrofit.ApiConfig
+import com.example.toolmate.data.fetcher.MediaFetcher
+import com.example.toolmate.data.fetcher.TiktokMediaFetcher
+import com.example.toolmate.data.fetcher.YoutubeMediaFetcher
 import com.example.toolmate.databinding.ActivityDownloaderBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DownloaderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDownloaderBinding
@@ -42,9 +41,16 @@ class DownloaderActivity : AppCompatActivity() {
             .into(binding.imgLogo)
 
         binding.btLink.setOnClickListener {
+            var mediaOption = binding.tvPlatform.text
+            var etLink = binding.etLink.text.toString()
             setDownloaderVisibility(false)
             showLoading(true)
-            getInfoMedia(binding.etLink.text.toString())
+            when (mediaOption) {
+                "Youtube" -> getInfoMedia(etLink, YoutubeMediaFetcher())
+                "Instagram" -> TODO("Coming Soon")
+                "Tiktok" -> getInfoMedia(etLink, TiktokMediaFetcher())
+                else -> TODO("Kosong Cik")
+            }
         }
     }
 
@@ -61,32 +67,20 @@ class DownloaderActivity : AppCompatActivity() {
         binding.pbDownloader.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
-    private fun getInfoMedia(url: String) {
-        val client = ApiConfig.getApiService().getYoutubeVideo(url)
-        client.enqueue(object : Callback<YoutubeResponse> {
-            override fun onResponse(
-                call: Call<YoutubeResponse?>,
-                response: Response<YoutubeResponse?>
-            ) {
-                showLoading(false)
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    Glide.with(this@DownloaderActivity)
-                        .load(responseBody?.result?.metadata?.thumbnail)
-                        .into(binding.imgMedia)
-                    binding.tvTitleMedia.text = responseBody?.result?.title
-                    binding.tvDurationMedia.text = responseBody?.result?.metadata?.duration
-                    setDownloaderVisibility(true)
-                }
+    private fun getInfoMedia(url: String, fetcher: MediaFetcher) {
+        showLoading(true)
+        fetcher.fetchMedia(url) { result ->
+            showLoading(false)
+            if (result != null) {
+                Glide.with(this@DownloaderActivity)
+                    .load(result.thumbnail)
+                    .into(binding.imgMedia)
+                binding.tvTitleMedia.text = result.title
+                binding.tvDurationMedia.text = result.duration
+                setDownloaderVisibility(true)
+            } else {
+                Toast.makeText(this, "Failed to fetch media info.", Toast.LENGTH_SHORT).show()
             }
-
-            override fun onFailure(
-                p0: Call<YoutubeResponse?>,
-                p1: Throwable
-            ) {
-                TODO("Not yet implemented")
-            }
-
-        })
+        }
     }
 }

@@ -85,13 +85,15 @@
 
     <TextView
         android:id="@+id/tvTitleMedia"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/title_media"
+        android:visibility="invisible"
+        android:gravity="start"
+        app:layout_constraintEnd_toEndOf="@+id/imgMedia"
         app:layout_constraintStart_toEndOf="@+id/tvTitle"
-        app:layout_constraintTop_toTopOf="@+id/tvTitle"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
     <TextView
         android:id="@+id/tvDuration"
@@ -105,15 +107,19 @@
 
     <TextView
         android:id="@+id/tvDurationMedia"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/duration_media"
+        android:visibility="invisible"
+        android:gravity="start"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitleMedia"
         app:layout_constraintStart_toEndOf="@+id/tvDuration"
-        app:layout_constraintTop_toTopOf="@+id/tvDuration"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toTopOf="@+id/tvDuration" />
 
     <Button
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        app:icon="@drawable/baseline_download_24"
         android:id="@+id/btnDownload"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
