@@ -88,9 +88,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:gravity="start"
         android:text="@string/title_media"
         android:visibility="invisible"
-        android:gravity="start"
         app:layout_constraintEnd_toEndOf="@+id/imgMedia"
         app:layout_constraintStart_toEndOf="@+id/tvTitle"
         app:layout_constraintTop_toTopOf="@+id/tvTitle" />
@@ -101,9 +101,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/duration"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-        android:visibility="invisible"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleMedia" />
 
     <TextView
         android:id="@+id/tvDurationMedia"

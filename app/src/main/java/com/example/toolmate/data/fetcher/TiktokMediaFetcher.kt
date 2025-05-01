@@ -1,7 +1,6 @@
 package com.example.toolmate.data.fetcher
 
 import com.example.toolmate.data.response.TiktokResponse
-import com.example.toolmate.data.response.YoutubeResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,7 +22,8 @@ class TiktokMediaFetcher: MediaFetcher {
                     val result = MediaResult(
                         thumbnail = data?.media?.coverUrl,
                         title = data?.title,
-                        duration = data?.duration.toString()
+                        duration = data?.duration.toString(),
+                        links = listOf(data?.media?.videoUrl.toString())
                     )
                     onResult(result)
                 } else {

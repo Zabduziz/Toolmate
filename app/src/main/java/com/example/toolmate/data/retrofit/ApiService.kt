@@ -26,7 +26,7 @@ interface ApiService {
     ): Call<YoutubeResponse>
 
     // Instagram Video Download
-    @GET("downup/igdown")
+    @GET("downup/igdown/advanced")
     fun getInstagramInfo(@Query("url") url: String): Call<InstagramResponse>
 
     // TikTok Video Download

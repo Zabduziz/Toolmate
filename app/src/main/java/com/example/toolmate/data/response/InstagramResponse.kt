@@ -19,18 +19,27 @@ data class InstagramResponse(
 
 data class InstagramResult(
 
-	@field:SerializedName("data")
-	val data: List<InstagramDataItem>,
+	@field:SerializedName("images")
+	val images: List<String>,
 
-	@field:SerializedName("status")
-	val status: Boolean
-)
+	@field:SerializedName("full_name")
+	val fullName: String,
 
-data class InstagramDataItem(
+	@field:SerializedName("comments")
+	val comments: Int,
 
-	@field:SerializedName("thumbnail")
-	val thumbnail: String,
+	@field:SerializedName("caption")
+	val caption: String,
 
-	@field:SerializedName("url")
-	val url: String
+	@field:SerializedName("created_at")
+	val createdAt: String,
+
+	@field:SerializedName("videos")
+	val videos: List<String>,
+
+	@field:SerializedName("username")
+	val username: String,
+
+	@field:SerializedName("likes")
+	val likes: Int
 )

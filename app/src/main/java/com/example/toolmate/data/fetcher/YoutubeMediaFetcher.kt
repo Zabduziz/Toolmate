@@ -22,7 +22,8 @@ class YoutubeMediaFetcher: MediaFetcher {
                     val result = MediaResult(
                         thumbnail = data?.metadata?.thumbnail,
                         title = data?.title,
-                        duration = data?.metadata?.duration
+                        duration = data?.metadata?.duration,
+                        links = listOf(data?.url.toString())
                     )
                     onResult(result)
                 } else {

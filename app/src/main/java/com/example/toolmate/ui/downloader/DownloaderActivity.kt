@@ -5,10 +5,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.toolmate.R
+import com.example.toolmate.data.fetcher.InstagramMediaFetcher
 import com.example.toolmate.data.fetcher.MediaFetcher
 import com.example.toolmate.data.fetcher.TiktokMediaFetcher
 import com.example.toolmate.data.fetcher.YoutubeMediaFetcher
@@ -16,6 +18,7 @@ import com.example.toolmate.databinding.ActivityDownloaderBinding
 
 class DownloaderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDownloaderBinding
+    private var linksDownload = mutableListOf(null)
 
     companion object {
         const val NAME_PLATFORM = "nama_platform"
@@ -47,7 +50,7 @@ class DownloaderActivity : AppCompatActivity() {
             showLoading(true)
             when (mediaOption) {
                 "Youtube" -> getInfoMedia(etLink, YoutubeMediaFetcher())
-                "Instagram" -> TODO("Coming Soon")
+                "Instagram" -> getInfoMedia(etLink, InstagramMediaFetcher())
                 "Tiktok" -> getInfoMedia(etLink, TiktokMediaFetcher())
                 else -> TODO("Kosong Cik")
             }
@@ -75,7 +78,10 @@ class DownloaderActivity : AppCompatActivity() {
                 Glide.with(this@DownloaderActivity)
                     .load(result.thumbnail)
                     .into(binding.imgMedia)
-                binding.tvTitleMedia.text = result.title
+                binding.tvTitleMedia.text = HtmlCompat.fromHtml(
+                    result.title.toString(),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
                 binding.tvDurationMedia.text = result.duration
                 setDownloaderVisibility(true)
             } else {
