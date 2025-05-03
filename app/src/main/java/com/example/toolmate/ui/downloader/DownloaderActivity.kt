@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.toolmate.R
+import com.example.toolmate.data.downloadmanager.AndroidDownloader
 import com.example.toolmate.data.fetcher.InstagramMediaFetcher
 import com.example.toolmate.data.fetcher.MediaFetcher
 import com.example.toolmate.data.fetcher.TiktokMediaFetcher
@@ -18,7 +19,7 @@ import com.example.toolmate.databinding.ActivityDownloaderBinding
 
 class DownloaderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDownloaderBinding
-    private var linksDownload = mutableListOf(null)
+    private var linksDownload = mutableListOf<String>()
 
     companion object {
         const val NAME_PLATFORM = "nama_platform"
@@ -44,6 +45,7 @@ class DownloaderActivity : AppCompatActivity() {
             .into(binding.imgLogo)
 
         binding.btLink.setOnClickListener {
+            linksDownload.clear()
             var mediaOption = binding.tvPlatform.text
             var etLink = binding.etLink.text.toString()
             setDownloaderVisibility(false)
@@ -53,6 +55,13 @@ class DownloaderActivity : AppCompatActivity() {
                 "Instagram" -> getInfoMedia(etLink, InstagramMediaFetcher())
                 "Tiktok" -> getInfoMedia(etLink, TiktokMediaFetcher())
                 else -> TODO("Kosong Cik")
+            }
+        }
+
+        binding.btnDownload.setOnClickListener {
+            val downloader = AndroidDownloader(this)
+            for (x in linksDownload) {
+                downloader.downloadFile(x)
             }
         }
     }
@@ -83,6 +92,7 @@ class DownloaderActivity : AppCompatActivity() {
                     HtmlCompat.FROM_HTML_MODE_LEGACY
                 )
                 binding.tvDurationMedia.text = result.duration
+                linksDownload.addAll(result.links ?: emptyList())
                 setDownloaderVisibility(true)
             } else {
                 Toast.makeText(this, "Failed to fetch media info.", Toast.LENGTH_SHORT).show()
