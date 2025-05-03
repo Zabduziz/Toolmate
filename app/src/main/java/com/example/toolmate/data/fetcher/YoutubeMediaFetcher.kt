@@ -23,7 +23,7 @@ class YoutubeMediaFetcher: MediaFetcher {
                         thumbnail = data?.metadata?.thumbnail,
                         title = data?.title,
                         duration = data?.metadata?.duration,
-                        links = listOf(data?.url.toString())
+                        links = listOf(data?.media.toString())
                     )
                     onResult(result)
                 } else {
