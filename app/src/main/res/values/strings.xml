@@ -22,11 +22,6 @@
         <item>Facebook</item>
         <item>Threads</item>
         <item>SnackVideo</item>
-        <item>Spotify</item>
-        <item>Soundcloud</item>
-        <item>Apple Music</item>
-        <item>Terabox</item>
-        <item>MediaFire</item>
         <item>Bstation</item>
     </string-array>
 
@@ -38,11 +33,6 @@
         <item>https://myamazonguy.com/wp-content/uploads/2022/04/Facebook_f_logo_2021.svg.png</item>
         <item>https://www.freelogovectors.net/wp-content/uploads/2023/07/threads-logo-01-freelogovectors.net_.png</item>
         <item>https://upload.wikimedia.org/wikipedia/commons/b/bc/Snack_Video.png</item>
-        <item>https://cdn4.iconfinder.com/data/icons/various-icons-2/476/Spotify.png</item>
-        <item>https://logospng.org/download/soundcloud/logo-soundcloud-4096.png</item>
-        <item>https://www.pngmart.com/files/23/Apple-Music-Logo-PNG-Pic.png</item>
-        <item>https://martsbd.com/wp-content/uploads/2023/05/TeraBox-Premium-Subscription.png</item>
-        <item>https://1.bp.blogspot.com/-TobtsgXtkE8/VwnZlDeQRzI/AAAAAAAAAZ4/YDSmUV4krdIMgGfOL-bbCenswjmuG7iaA/s1600/mediafire.png</item>
         <item>https://img.icons8.com/color/452/bilibili.png</item>
     </string-array>
 </resources>

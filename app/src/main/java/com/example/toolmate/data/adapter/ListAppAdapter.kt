@@ -1,4 +1,4 @@
-package com.example.toolmate
+package com.example.toolmate.data.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.toolmate.R
 import com.example.toolmate.ui.downloader.DownloaderActivity
 
 

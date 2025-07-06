@@ -7,16 +7,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class InstagramMediaFetcher: MediaFetcher {
-    override fun fetchMedia(
-        url: String,
-        onResult: (MediaResult?) -> Unit
-    ) {
+    override fun fetchMedia(url: String, onResult: (MediaResult?) -> Unit) {
         val client = ApiConfig.getApiService().getInstagramInfo(url)
         client.enqueue(object : Callback<InstagramResponse> {
-            override fun onResponse(
-                call: Call<InstagramResponse?>,
-                response: Response<InstagramResponse?>
-            ) {
+            override fun onResponse(call: Call<InstagramResponse?>, response: Response<InstagramResponse?>) {
                 if (response.isSuccessful) {
                     val data = response.body()?.result
                     val linksDownload = mutableListOf<String>()
@@ -33,10 +27,7 @@ class InstagramMediaFetcher: MediaFetcher {
                     onResult(null)
                 }
             }
-            override fun onFailure(
-                call: Call<InstagramResponse?>,
-                response: Throwable
-            ) {
+            override fun onFailure(call: Call<InstagramResponse?>, response: Throwable) {
                 TODO("Not yet implemented")
             }
         })

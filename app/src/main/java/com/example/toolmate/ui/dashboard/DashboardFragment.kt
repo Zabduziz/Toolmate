@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.toolmate.ListAppAdapter
+import com.example.toolmate.data.adapter.ListAppAdapter
 import com.example.toolmate.R
-import com.example.toolmate.apps
+import com.example.toolmate.data.adapter.apps
 import com.example.toolmate.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
