@@ -10,15 +10,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.example.toolmate.R
+import com.example.toolmate.data.downloadmanager.AndroidDownloader
+import com.example.toolmate.data.fetcher.BstationMediaFetcher
+import com.example.toolmate.data.fetcher.FacebookMediaFetcher
 import com.example.toolmate.data.fetcher.InstagramMediaFetcher
 import com.example.toolmate.data.fetcher.MediaFetcher
+import com.example.toolmate.data.fetcher.SnackVideoMediaFetcher
+import com.example.toolmate.data.fetcher.ThreadsMediaFetcher
 import com.example.toolmate.data.fetcher.TiktokMediaFetcher
+import com.example.toolmate.data.fetcher.TwitterMediaFetcher
 import com.example.toolmate.data.fetcher.YoutubeMediaFetcher
 import com.example.toolmate.databinding.ActivityDownloaderBinding
 
-class DownloaderActivity : AppCompatActivity() {
+class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDownloaderBinding
-    private var linksDownload = mutableListOf(null)
+    private var linksDownload = mutableListOf<String>()
 
     companion object {
         const val NAME_PLATFORM = "nama_platform"
@@ -43,17 +49,38 @@ class DownloaderActivity : AppCompatActivity() {
             .load(img)
             .into(binding.imgLogo)
 
-        binding.btLink.setOnClickListener {
-            var mediaOption = binding.tvPlatform.text
-            var etLink = binding.etLink.text.toString()
-            setDownloaderVisibility(false)
-            showLoading(true)
-            when (mediaOption) {
-                "Youtube" -> getInfoMedia(etLink, YoutubeMediaFetcher())
-                "Instagram" -> getInfoMedia(etLink, InstagramMediaFetcher())
-                "Tiktok" -> getInfoMedia(etLink, TiktokMediaFetcher())
-                else -> TODO("Kosong Cik")
+        binding.btLink.setOnClickListener(this)
+        binding.btnDownload.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btLink -> {
+                linksDownload.clear()
+                var mediaOption = binding.tvPlatform.text
+                var etLink = binding.etLink.text.toString()
+                setDownloaderVisibility(false)
+                showLoading(true)
+                when (mediaOption) {
+                    "Youtube" -> getInfoMedia(etLink, YoutubeMediaFetcher())
+                    "Instagram" -> getInfoMedia(etLink, InstagramMediaFetcher())
+                    "Tiktok" -> getInfoMedia(etLink, TiktokMediaFetcher())
+                    "Twitter" -> getInfoMedia(etLink, TwitterMediaFetcher())
+                    "Facebook" -> getInfoMedia(etLink, FacebookMediaFetcher())
+                    "Threads" -> getInfoMedia(etLink, ThreadsMediaFetcher())
+                    "SnackVideo" -> getInfoMedia(etLink, SnackVideoMediaFetcher())
+                    "Bstation" -> getInfoMedia(etLink, BstationMediaFetcher())
+                    else -> TODO("Kosong Cik")
+                }
             }
+            R.id.btnDownload -> {
+                binding.btnDownload.isClickable = false
+                val downloader = AndroidDownloader(this)
+                for (x in linksDownload) {
+                    downloader.downloadFile(x)
+                }
+            }
+            else -> TODO()
         }
     }
 
@@ -83,7 +110,9 @@ class DownloaderActivity : AppCompatActivity() {
                     HtmlCompat.FROM_HTML_MODE_LEGACY
                 )
                 binding.tvDurationMedia.text = result.duration
+                linksDownload.addAll(result.links ?: emptyList())
                 setDownloaderVisibility(true)
+                binding.btnDownload.isClickable = true
             } else {
                 Toast.makeText(this, "Failed to fetch media info.", Toast.LENGTH_SHORT).show()
             }

@@ -1,30 +1,31 @@
 package com.example.toolmate.data.fetcher
 
-import com.example.toolmate.data.response.TiktokResponse
+import com.example.toolmate.data.response.SnackVideoResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TiktokMediaFetcher: MediaFetcher {
+class SnackVideoMediaFetcher: MediaFetcher {
     override fun fetchMedia(url: String, onResult: (MediaResult?) -> Unit) {
-        val client = ApiConfig.getApiService().getTiktokInfo(url)
-        client.enqueue(object : Callback<TiktokResponse> {
-            override fun onResponse(call: Call<TiktokResponse?>, response: Response<TiktokResponse?>) {
+        val client = ApiConfig.getApiService().getSnackVideoInfo(url)
+        client.enqueue(object : Callback<SnackVideoResponse> {
+            override fun onResponse(call: Call<SnackVideoResponse?>, response: Response<SnackVideoResponse?>) {
                 if (response.isSuccessful) {
                     val data = response.body()?.result
                     val result = MediaResult(
-                        thumbnail = data?.media?.coverUrl,
+                        thumbnail = data?.thumbnail,
                         title = data?.title,
-                        duration = data?.duration.toString(),
-                        links = listOf(data?.media?.videoUrl.toString())
+                        duration = null,
+                        links = listOf(data?.media.toString())
                     )
                     onResult(result)
                 } else {
                     onResult(null)
                 }
             }
-            override fun onFailure(call: Call<TiktokResponse?>, response: Throwable) {
+
+            override fun onFailure(p0: Call<SnackVideoResponse?>, p1: Throwable) {
                 TODO("Not yet implemented")
             }
         })

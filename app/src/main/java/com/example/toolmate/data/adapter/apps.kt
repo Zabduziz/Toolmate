@@ -1,4 +1,4 @@
-package com.example.toolmate
+package com.example.toolmate.data.adapter
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
