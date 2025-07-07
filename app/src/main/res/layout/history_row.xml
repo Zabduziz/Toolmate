@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:layout_margin="8dp"
     card_view:cardCornerRadius="12dp"
     card_view:cardElevation="4dp">
@@ -15,7 +14,7 @@
         android:padding="12dp">
 
         <ImageView
-            android:id="@+id/image_thumbnail"
+            android:id="@+id/imgThumbnail"
             android:layout_width="64dp"
             android:layout_height="64dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
@@ -24,29 +23,29 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/text_media_name"
+            android:id="@+id/tvNameMedia"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:text="@string/media_name"
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:textStyle="bold"
-            card_view:layout_constraintStart_toEndOf="@id/image_thumbnail"
-            card_view:layout_constraintTop_toTopOf="@id/image_thumbnail"
+            card_view:layout_constraintStart_toEndOf="@id/imgThumbnail"
+            card_view:layout_constraintTop_toTopOf="@id/imgThumbnail"
             card_view:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:id="@+id/text_download_date"
+            android:id="@+id/tvDateDownload"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
             android:text="@string/tanggal_download"
             android:textAppearance="?attr/textAppearanceBody2"
-            card_view:layout_constraintStart_toEndOf="@id/image_thumbnail"
-            card_view:layout_constraintTop_toBottomOf="@id/text_media_name"
+            card_view:layout_constraintStart_toEndOf="@id/imgThumbnail"
+            card_view:layout_constraintTop_toBottomOf="@id/tvNameMedia"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintBottom_toBottomOf="@id/image_thumbnail"/>
+            card_view:layout_constraintBottom_toBottomOf="@id/imgThumbnail"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

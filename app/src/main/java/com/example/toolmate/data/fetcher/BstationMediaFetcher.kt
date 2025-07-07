@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.BstationResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -25,8 +26,8 @@ class BstationMediaFetcher: MediaFetcher {
                 }
             }
 
-            override fun onFailure(call: Call<BstationResponse?>, response: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<BstationResponse?>, t: Throwable) {
+                Log.e("BstatitonMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
         })
     }

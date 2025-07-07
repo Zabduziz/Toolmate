@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.FacebookResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -25,8 +26,8 @@ class FacebookMediaFetcher: MediaFetcher {
                 }
             }
 
-            override fun onFailure(p0: Call<FacebookResponse?>, p1: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<FacebookResponse?>, t: Throwable) {
+                Log.e("FacebookMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
 
         })
