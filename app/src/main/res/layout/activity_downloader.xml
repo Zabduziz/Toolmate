@@ -2,142 +2,153 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tvDownloader"
+    android:id="@+id/downloader_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.downloader.DownloaderActivity">
 
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/etLink"
-        app:layout_constraintEnd_toEndOf="@+id/etLink"
-        app:layout_constraintTop_toTopOf="@+id/tvPlatform"
-        app:layout_constraintVertical_bias="0.483"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tvPlatform"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/media"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/title_downloader"
-        app:layout_constraintStart_toEndOf="@+id/tvPlatform"
-        app:layout_constraintTop_toTopOf="@+id/tvPlatform" />
-
-    <EditText
-        android:id="@+id/etLink"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="text"
-        android:minHeight="48dp"
-        android:text="@string/Hint"
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPlatform" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btLink"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/get_media"
-        app:layout_constraintEnd_toEndOf="@+id/etLink"
-        app:layout_constraintStart_toStartOf="@+id/etLink"
-        app:layout_constraintTop_toBottomOf="@+id/etLink" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imgMedia"
-        android:layout_width="0dp"
-        android:layout_height="225dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@id/etLink"
-        app:layout_constraintStart_toStartOf="@+id/etLink"
-        app:layout_constraintTop_toBottomOf="@+id/btLink"
-        tools:srcCompat="@tools:sample/backgrounds/scenic"
-        android:visibility="invisible"/>
+            <TextView
+                android:id="@+id/tvPlatform"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/media"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/title"
-        app:layout_constraintStart_toStartOf="@+id/imgMedia"
-        app:layout_constraintTop_toBottomOf="@+id/imgMedia"
-        android:visibility="invisible"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilLink"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/Hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPlatform">
 
-    <TextView
-        android:id="@+id/tvTitleMedia"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:gravity="start"
-        android:text="@string/title_media"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/imgMedia"
-        app:layout_constraintStart_toEndOf="@+id/tvTitle"
-        app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textUri"
+                    android:maxLines="1" />
 
-    <TextView
-        android:id="@+id/tvDuration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/duration"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="@+id/tvTitle"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitleMedia" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tvDurationMedia"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/duration_media"
-        android:visibility="invisible"
-        android:gravity="start"
-        app:layout_constraintEnd_toEndOf="@+id/tvTitleMedia"
-        app:layout_constraintStart_toEndOf="@+id/tvDuration"
-        app:layout_constraintTop_toTopOf="@+id/tvDuration" />
+            <Button
+                android:id="@+id/btLink"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/get_media"
+                app:layout_constraintEnd_toEndOf="@+id/tilLink"
+                app:layout_constraintStart_toStartOf="@+id/tilLink"
+                app:layout_constraintTop_toBottomOf="@+id/tilLink" />
 
-    <Button
-        style="@style/Widget.Material3.Button.OutlinedButton"
-        app:icon="@drawable/baseline_download_24"
-        android:id="@+id/btnDownload"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/Download"
-        app:layout_constraintEnd_toEndOf="@+id/etLink"
-        app:layout_constraintStart_toStartOf="@+id/etLink"
-        app:layout_constraintTop_toBottomOf="@+id/tvDuration"
-        android:visibility="invisible"/>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardResult"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:cardElevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/btLink"
+                app:layout_constraintStart_toStartOf="@+id/btLink"
+                app:layout_constraintTop_toBottomOf="@+id/btLink"
+                app:layout_constraintVertical_bias="0.0"
+                tools:visibility="visible">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imgMedia"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="16:9"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                    <TextView
+                        android:id="@+id/tvMediaTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imgMedia"
+                        tools:text="Title: This is a really cool media title that could be long." />
+
+                    <TextView
+                        android:id="@+id/tvMediaDuration"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        app:layout_constraintEnd_toEndOf="@+id/tvMediaTitle"
+                        app:layout_constraintStart_toStartOf="@+id/tvMediaTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/tvMediaTitle"
+                        tools:text="Duration: 04:20" />
+
+                    <Button
+                        android:id="@+id/btnDownload"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/Download"
+                        app:icon="@drawable/baseline_download_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvMediaDuration" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <ProgressBar
         android:id="@+id/pbDownloader"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="invisible"/>
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

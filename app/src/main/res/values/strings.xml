@@ -13,6 +13,9 @@
     <!-- Menu Aplikasi -->
     <string name="apps_name">Nama Aplikasi</string>
     <string name="appicons_name">Ini Gambar</string>
+    <!-- String History -->
+    <string name="media_name">Nama Media</string>
+    <string name="tanggal_download">Tanggal Download</string>
 
     <string-array name="data_apps">
         <item>Youtube</item>

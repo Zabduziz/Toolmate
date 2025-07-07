@@ -37,18 +37,13 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityDownloaderBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tvDownloader)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tvPlatform)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
         binding.tvPlatform.text = intent.getStringExtra(NAME_PLATFORM)
-        val img = intent.getStringExtra(LOGO_PLATFORM)
-        Glide.with(this@DownloaderActivity)
-            .load(img)
-            .into(binding.imgLogo)
-
         binding.btLink.setOnClickListener(this)
         binding.btnDownload.setOnClickListener(this)
     }
@@ -85,12 +80,7 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun setDownloaderVisibility(visible: Boolean) {
-        binding.imgMedia.visibility = if (visible) View.VISIBLE else View.INVISIBLE
-        binding.tvTitle.visibility = if (visible) View.VISIBLE else View.INVISIBLE
-        binding.tvTitleMedia.visibility = if (visible) View.VISIBLE else View.INVISIBLE
-        binding.tvDuration.visibility = if (visible) View.VISIBLE else View.INVISIBLE
-        binding.tvDurationMedia.visibility = if (visible) View.VISIBLE else View.INVISIBLE
-        binding.btnDownload.visibility = if (visible) View.VISIBLE else View.INVISIBLE
+        binding.cardResult.visibility = if (visible) View.VISIBLE else View.INVISIBLE
     }
 
     private fun showLoading(visible: Boolean) {
@@ -105,11 +95,11 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
                 Glide.with(this@DownloaderActivity)
                     .load(result.thumbnail)
                     .into(binding.imgMedia)
-                binding.tvTitleMedia.text = HtmlCompat.fromHtml(
+                binding.tvMediaTitle.text = HtmlCompat.fromHtml(
                     result.title.toString(),
                     HtmlCompat.FROM_HTML_MODE_LEGACY
                 )
-                binding.tvDurationMedia.text = result.duration
+                binding.tvMediaDuration.text = result.duration
                 linksDownload.addAll(result.links ?: emptyList())
                 setDownloaderVisibility(true)
                 binding.btnDownload.isClickable = true
