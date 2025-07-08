@@ -16,9 +16,9 @@ class TwitterMediaFetcher: MediaFetcher {
                     val data = response.body()?.result
                     val result = MediaResult(
                         thumbnail = data?.thumb,
-                        title = null,
+                        title = data?.desc,
                         duration = null,
-                        links = listOf(data?.videosd.toString())
+                        links = listOf(data?.videohd.toString())
                     )
                     onResult(result)
                 } else {
