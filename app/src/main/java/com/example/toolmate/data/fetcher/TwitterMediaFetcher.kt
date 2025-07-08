@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.TwitterResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -15,9 +16,9 @@ class TwitterMediaFetcher: MediaFetcher {
                     val data = response.body()?.result
                     val result = MediaResult(
                         thumbnail = data?.thumb,
-                        title = null,
+                        title = data?.desc,
                         duration = null,
-                        links = listOf(data?.videosd.toString())
+                        links = listOf(data?.videohd.toString())
                     )
                     onResult(result)
                 } else {
@@ -25,8 +26,8 @@ class TwitterMediaFetcher: MediaFetcher {
                 }
             }
 
-            override fun onFailure(call: Call<TwitterResponse?>, response: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<TwitterResponse?>, t: Throwable) {
+                Log.e("TwitterMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
 
         })

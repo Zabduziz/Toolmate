@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.ThreadsResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -25,8 +26,8 @@ class ThreadsMediaFetcher: MediaFetcher {
                 }
             }
 
-            override fun onFailure(call: Call<ThreadsResponse?>, response: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<ThreadsResponse?>, t: Throwable) {
+                Log.e("ThreadsMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
         })
     }

@@ -13,10 +13,7 @@ import com.example.toolmate.ui.downloader.DownloaderActivity
 
 
 class ListAppAdapter(private val listapp: ArrayList<apps>): RecyclerView.Adapter<ListAppAdapter.ListViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_app_row, parent, false)
         return ListViewHolder(view)
     }

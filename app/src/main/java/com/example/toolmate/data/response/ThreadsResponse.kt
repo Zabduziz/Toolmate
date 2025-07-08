@@ -26,7 +26,7 @@ data class ThreadsResult(
 	val avatar: String,
 
 	@field:SerializedName("url")
-	val url: List<String>,
+	val url: String,
 
 	@field:SerializedName("username")
 	val username: String

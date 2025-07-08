@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.SnackVideoResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -25,8 +26,8 @@ class SnackVideoMediaFetcher: MediaFetcher {
                 }
             }
 
-            override fun onFailure(p0: Call<SnackVideoResponse?>, p1: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<SnackVideoResponse?>, t: Throwable) {
+                Log.e("SnackVideoMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
         })
     }

@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.YoutubeResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -24,8 +25,8 @@ class YoutubeMediaFetcher: MediaFetcher {
                     onResult(null)
                 }
             }
-            override fun onFailure(call: Call<YoutubeResponse?>, response: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<YoutubeResponse?>, t: Throwable) {
+                Log.e("YoutubeMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
         })
     }

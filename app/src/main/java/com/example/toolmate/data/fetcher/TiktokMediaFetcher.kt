@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.TiktokResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -24,8 +25,8 @@ class TiktokMediaFetcher: MediaFetcher {
                     onResult(null)
                 }
             }
-            override fun onFailure(call: Call<TiktokResponse?>, response: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<TiktokResponse?>, t: Throwable) {
+                Log.e("TiktokMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
         })
     }

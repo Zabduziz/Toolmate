@@ -1,5 +1,6 @@
 package com.example.toolmate.data.fetcher
 
+import android.util.Log
 import com.example.toolmate.data.response.InstagramResponse
 import com.example.toolmate.data.retrofit.ApiConfig
 import retrofit2.Call
@@ -27,8 +28,8 @@ class InstagramMediaFetcher: MediaFetcher {
                     onResult(null)
                 }
             }
-            override fun onFailure(call: Call<InstagramResponse?>, response: Throwable) {
-                TODO("Not yet implemented")
+            override fun onFailure(call: Call<InstagramResponse?>, t: Throwable) {
+                Log.e("InstagramMediaFetcher", "API call failed: ${t.localizedMessage}")
             }
         })
     }

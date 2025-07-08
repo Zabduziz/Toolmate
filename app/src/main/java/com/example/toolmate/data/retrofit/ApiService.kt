@@ -14,11 +14,9 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    // YouTube Video Download - With URL and optional Quality parameter
+    // YouTube Video Download
     @GET("downup/ytmp4")
-    fun getYoutubeVideo(
-        @Query("url") url: String,
-    ): Call<YoutubeResponse>
+    fun getYoutubeVideo(@Query("url") url: String): Call<YoutubeResponse>
 
     // Instagram Video Download
     @GET("downup/igdown/advanced")
@@ -29,7 +27,7 @@ interface ApiService {
     fun getTiktokInfo(@Query("url") url: String): Call<TiktokResponse>
 
     // Twitter Video Download
-    @GET("downup/twdown")
+    @GET("downup/twdown/simple")
     fun getTwitterInfo(@Query("url") url: String): Call<TwitterResponse>
 
     // Facebook Video Download
