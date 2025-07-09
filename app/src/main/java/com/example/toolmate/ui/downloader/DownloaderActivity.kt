@@ -1,9 +1,12 @@
 package com.example.toolmate.ui.downloader
 
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.core.view.ViewCompat
@@ -21,6 +24,7 @@ import com.example.toolmate.data.fetcher.TiktokMediaFetcher
 import com.example.toolmate.data.fetcher.TwitterMediaFetcher
 import com.example.toolmate.data.fetcher.YoutubeMediaFetcher
 import com.example.toolmate.databinding.ActivityDownloaderBinding
+import com.google.android.material.textfield.TextInputEditText
 
 class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDownloaderBinding
@@ -69,10 +73,13 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
             R.id.btnDownload -> {
-                binding.btnDownload.isClickable = false
-                val downloader = AndroidDownloader(this)
-                for (x in linksDownload) {
-                    downloader.downloadFile(x)
+                showSaveAsDialog(this) {fileName ->
+                    binding.btnDownload.isClickable = false
+                    val downloader = AndroidDownloader(this, fileName)
+                    for (x in linksDownload) {
+                        Toast.makeText(this, "Start Downloading ${fileName}", Toast.LENGTH_SHORT).show()
+                        downloader.downloadFile(x)
+                    }
                 }
             }
             else -> TODO()
@@ -108,4 +115,28 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    fun showSaveAsDialog(context: Context, onAccept: (String) -> Unit) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_save_as, null)
+        val editText = dialogView.findViewById<TextInputEditText>(R.id.etNameFile)
+
+        val dialog = AlertDialog.Builder(context)
+            .setTitle(R.string.dialog_title)
+            .setView(dialogView)
+            .setNegativeButton("Cancel") { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            }
+            .setPositiveButton("Accept") { _, _ ->
+                val fileName = editText.text.toString().trim()
+                if (fileName.isNotEmpty()) {
+                    onAccept("$fileName.mp4")
+                } else {
+                    Toast.makeText(context, "Filename can't be empty", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .create()
+
+        dialog.show()
+    }
+
 }
