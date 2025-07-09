@@ -77,7 +77,7 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
                     binding.btnDownload.isClickable = false
                     val downloader = AndroidDownloader(this, fileName)
                     for (x in linksDownload) {
-                        Toast.makeText(this, "Start Downloading ${fileName}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Start Downloading $fileName", Toast.LENGTH_SHORT).show()
                         downloader.downloadFile(x)
                     }
                 }
