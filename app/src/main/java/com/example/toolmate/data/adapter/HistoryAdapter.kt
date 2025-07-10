@@ -15,12 +15,22 @@ import com.example.toolmate.databinding.HistoryRowBinding
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
     private val listHistory = ArrayList<History>()
+    private var onItemClickCallback: OnItemClickCallback? = null
+
     fun setListHistory(listHistory: List<History>) {
         val diffCallback = HistoryDiffCallback(this.listHistory, listHistory)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listHistory.clear()
         this.listHistory.addAll(listHistory)
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(history: History)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -44,6 +54,11 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
                 Glide.with(binding.imgThumbnail.context)
                     .load(history.thumbnails)
                     .into(binding.imgThumbnail)
+
+                // Set Click listener di Itemview
+                root.setOnClickListener {
+                    onItemClickCallback?.onItemClicked(history)
+                }
             }
         }
     }

@@ -10,4 +10,6 @@ class HistoryViewModel(application: Application) : ViewModel() {
     private val mHistoryRepository: HistoryRepository = HistoryRepository(application)
 
     fun getAllHistory(): LiveData<List<History>> = mHistoryRepository.getAllHistory()
+
+    fun delete(history: History) {mHistoryRepository.delete(history)}
 }

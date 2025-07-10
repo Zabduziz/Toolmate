@@ -9,7 +9,7 @@ import androidx.room.Query
 
 @Dao
 interface HistoryDao {
-    @Query("SELECT * FROM history ORDER BY datedownload ASC")
+    @Query("SELECT * FROM history ORDER BY datedownload DESC")
     fun getAllHistory(): LiveData<List<History>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
