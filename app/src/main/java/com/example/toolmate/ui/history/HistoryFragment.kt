@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.toolmate.databinding.FragmentNotificationsBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.toolmate.data.adapter.HistoryAdapter
+import com.example.toolmate.data.helper.ViewModelFactory
+import com.example.toolmate.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+    private var _binding: FragmentHistoryBinding? = null
+    private lateinit var adapter: HistoryAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,21 +25,35 @@ class HistoryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(HistoryViewModel::class.java)
-
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val historyViewModel = obtainViewModel()
+        adapter = HistoryAdapter()
+
+        historyViewModel.getAllHistory().observe(viewLifecycleOwner) { historyList ->
+            if (historyList != null) {
+                adapter.setListHistory(historyList)
+            }
+        }
+
+        binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvHistory.setHasFixedSize(true)
+        binding.rvHistory.adapter = adapter
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun obtainViewModel(): HistoryViewModel {
+        val factory = ViewModelFactory.getInstance(requireActivity().application)
+        return ViewModelProvider(this, factory).get(HistoryViewModel::class.java)
     }
 }
