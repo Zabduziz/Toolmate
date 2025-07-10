@@ -16,6 +16,9 @@
     <!-- String History -->
     <string name="media_name">Nama Media</string>
     <string name="tanggal_download">Tanggal Download</string>
+    <!-- Dialog Save As -->
+    <string name="dialog_title">Save As</string>
+    <string name="dialog_hint">File Name</string>
 
     <string-array name="data_apps">
         <item>Youtube</item>
