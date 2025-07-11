@@ -44,6 +44,13 @@ class HistoryFragment : Fragment() {
             }
         })
 
+        adapter.setOnItemLongClickCallback(object : HistoryAdapter.OnItemLongClickCallback {
+            override fun onItemLongClicked(history: History) {
+                adapter.toggleSelection(history)
+                updateMultiDeleteUI()
+            }
+        })
+
         historyViewModel.getAllHistory().observe(viewLifecycleOwner) { historyList ->
             if (historyList != null) {
                 adapter.setListHistory(historyList)
@@ -53,6 +60,13 @@ class HistoryFragment : Fragment() {
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvHistory.setHasFixedSize(true)
         binding.rvHistory.adapter = adapter
+
+        binding.fabDeleteSelected.setOnClickListener {
+            val selected = adapter.getSelectedItem()
+            if (selected.isNotEmpty()) {
+                showMultiDeleteDialog(selected)
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -77,5 +91,24 @@ class HistoryFragment : Fragment() {
             }
             .create()
         dialog.show()
+    }
+
+    private fun showMultiDeleteDialog(selected: List<History>) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Delete")
+        builder.setMessage("Delete ${selected.size} items?")
+        builder.setPositiveButton("Yes") { _, _ ->
+            val vm = obtainViewModel()
+            selected.forEach { vm.delete(it) }
+            adapter.clearSelection()
+            updateMultiDeleteUI()
+        }
+        builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
+        builder.show()
+    }
+
+    private fun updateMultiDeleteUI() {
+        val visible = adapter.getSelectedItem().isNotEmpty()
+        binding.fabDeleteSelected.visibility = if (visible) View.VISIBLE else View.GONE
     }
 }
