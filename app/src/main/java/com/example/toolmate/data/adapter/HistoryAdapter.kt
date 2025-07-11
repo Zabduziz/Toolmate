@@ -15,12 +15,52 @@ import com.example.toolmate.databinding.HistoryRowBinding
 
 class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
     private val listHistory = ArrayList<History>()
+    private var onItemClickCallback: OnItemClickCallback? = null
+    private var onItemLongClickCallback: OnItemLongClickCallback? = null
+    private val selectedItems = mutableSetOf<History>()
+
+    fun getSelectedItem(): List<History> = selectedItems.toList()
+
+    fun toggleSelection(history: History) {
+        if (selectedItems.contains(history)) {
+            selectedItems.remove(history)
+        } else {
+            selectedItems.add(history)
+        }
+        notifyDataSetChanged()
+    }
+
+    fun clearSelection() {
+        selectedItems.clear()
+        notifyDataSetChanged()
+    }
+
+    fun isItemSelected(history: History): Boolean {
+        return selectedItems.contains(history)
+    }
+
     fun setListHistory(listHistory: List<History>) {
         val diffCallback = HistoryDiffCallback(this.listHistory, listHistory)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listHistory.clear()
         this.listHistory.addAll(listHistory)
         diffResult.dispatchUpdatesTo(this)
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(history: History)
+    }
+
+    interface OnItemLongClickCallback {
+        fun onItemLongClicked(history: History)
+    }
+
+    fun setOnItemLongClickCallback(callback: OnItemLongClickCallback) {
+        onItemLongClickCallback = callback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -44,6 +84,25 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
                 Glide.with(binding.imgThumbnail.context)
                     .load(history.thumbnails)
                     .into(binding.imgThumbnail)
+
+                // Set Click listener di Itemview
+                root.isSelected = isItemSelected(history)
+                root.setBackgroundResource(
+                    if (isItemSelected(history)) R.color.md_theme_secondary else android.R.color.transparent
+                )
+
+                root.setOnLongClickListener {
+                    onItemLongClickCallback?.onItemLongClicked(history)
+                    true
+                }
+
+                root.setOnClickListener {
+                    if (selectedItems.isNotEmpty()) {
+                        onItemLongClickCallback?.onItemLongClicked(history)
+                    } else {
+                        onItemClickCallback?.onItemClicked(history)
+                    }
+                }
             }
         }
     }
