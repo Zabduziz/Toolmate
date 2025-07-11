@@ -25,8 +25,8 @@
 2. Build & Run in Android Studio.
 3. Try pasting the media URL, click download, and see the results.
 
-## 🙌 Contributions
+## Contributions
 This is a solo project for practice. If you have suggestions, please make a pull request, or fork it — feel free!
 
-## ⚠️ Disclaimer
+## Disclaimer
 Use wisely. All downloaded content is the responsibility of each user.
