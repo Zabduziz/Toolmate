@@ -19,6 +19,9 @@
     <!-- Dialog Save As -->
     <string name="dialog_title">Save As</string>
     <string name="dialog_hint">File Name</string>
+    <!-- Top App Bar Menu -->
+    <string name="account_menu">Account</string>
+    <string name="info_menu">Info</string>
 
     <string-array name="data_apps">
         <item>Youtube</item>

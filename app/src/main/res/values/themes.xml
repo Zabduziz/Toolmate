@@ -1,16 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ToolMate" parent="Theme.Material3.DayNight">
+    <style name="Theme.ToolMate" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/md_theme_primary</item>
-        <item name="colorPrimaryVariant">@color/md_theme_onPrimaryFixedVariant</item>
-        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorPrimary">@color/theme_primary</item>
+        <item name="colorPrimaryVariant">@color/theme_primary_variant</item>
+        <item name="colorOnPrimary">@color/text_icon_on_primary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/md_theme_secondary</item>
-        <item name="colorSecondaryVariant">@color/md_theme_onSecondaryFixedVariant</item>
-        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSecondary">@color/theme_secondary</item>
+        <item name="colorSecondaryVariant">@color/theme_secondary</item>
+        <item name="colorOnSecondary">@color/primary_text</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/status_bar_color</item>
+        <!-- Text colors -->
+        <item name="android:textColorPrimary">@color/primary_text</item> <!-- Primary Text -->
+        <item name="android:textColorSecondary">@color/secondary_text</item> <!-- Secondary Text -->
+
+        <!-- Divider color -->
+        <item name="android:divider">#BDBDBD</item>
     </style>
 </resources>

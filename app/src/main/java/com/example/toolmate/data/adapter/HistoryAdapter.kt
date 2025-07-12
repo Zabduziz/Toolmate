@@ -88,7 +88,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.ListViewHolder>() {
                 // Set Click listener di Itemview
                 root.isSelected = isItemSelected(history)
                 root.setBackgroundResource(
-                    if (isItemSelected(history)) R.color.md_theme_secondary else android.R.color.transparent
+                    if (isItemSelected(history)) R.color.selected_item else android.R.color.transparent
                 )
 
                 root.setOnLongClickListener {
