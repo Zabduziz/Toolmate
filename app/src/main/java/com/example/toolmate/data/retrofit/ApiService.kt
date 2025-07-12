@@ -16,7 +16,10 @@ interface ApiService {
 
     // YouTube Video Download
     @GET("downup/ytmp4")
-    fun getYoutubeVideo(@Query("url") url: String): Call<YoutubeResponse>
+    fun getYoutubeVideo(
+        @Query("url") url: String,
+        @Query("server") server: String = "auto"
+    ): Call<YoutubeResponse>
 
     // Instagram Video Download
     @GET("downup/igdown/advanced")
