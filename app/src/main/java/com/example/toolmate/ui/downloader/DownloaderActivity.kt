@@ -28,6 +28,7 @@ import com.example.toolmate.data.fetcher.YoutubeMediaFetcher
 import com.example.toolmate.data.helper.DateHelper
 import com.example.toolmate.data.helper.ViewModelFactory
 import com.example.toolmate.databinding.ActivityDownloaderBinding
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textfield.TextInputEditText
 
 class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
@@ -48,7 +49,14 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityDownloaderBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tvPlatform)) { v, insets ->
+
+        val topAppBar: MaterialToolbar = binding.topAppBarDownloader
+        setSupportActionBar(topAppBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        enableEdgeToEdge()
+        ViewCompat.setOnApplyWindowInsetsListener(binding.downloaderRoot) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
@@ -99,6 +107,11 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
             }
             else -> TODO()
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun setDownloaderVisibility(visible: Boolean) {
