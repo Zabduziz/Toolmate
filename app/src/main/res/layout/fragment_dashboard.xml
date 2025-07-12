@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.dashboard.DashboardFragment"
+    android:fitsSystemWindows="true">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_apps"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
-        android:paddingTop="55dp"
-        android:paddingBottom="100dp"
-        android:clipToPadding="false"
+        android:paddingTop="35dp"
+        android:paddingBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
