@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/text_icon_on_primary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/theme_secondary</item>
-        <item name="colorSecondaryVariant">@color/theme_secondary</item>
+        <item name="colorSecondaryVariant">@color/theme_secondary_variant</item>
         <item name="colorOnSecondary">@color/primary_text</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/status_bar_color</item>
@@ -17,5 +17,8 @@
 
         <!-- Divider color -->
         <item name="android:divider">#BDBDBD</item>
+
+        <!-- Customize your theme here. -->
+
     </style>
 </resources>
