@@ -58,6 +58,7 @@ dependencies {
 
     //Custom Dependencies Library
     implementation(libs.glide)
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
