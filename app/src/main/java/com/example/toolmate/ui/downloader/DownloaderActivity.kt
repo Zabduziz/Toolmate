@@ -86,7 +86,7 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
                     "Threads" -> getInfoMedia(etLink, ThreadsMediaFetcher())
                     "SnackVideo" -> getInfoMedia(etLink, SnackVideoMediaFetcher())
                     "Bstation" -> getInfoMedia(etLink, BstationMediaFetcher())
-                    else -> TODO("Kosong Cik")
+                    else -> Toast.makeText(this, "Media not Found", Toast.LENGTH_SHORT).show()
                 }
             }
             R.id.btnDownload -> {
@@ -100,12 +100,13 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
                     val history = History(
                         medianame = fileName,
                         datedownload = DateHelper.getCurrentDate(),
-                        thumbnails = thumbnail
+                        thumbnails = thumbnail,
+                        downloadlink = binding.etLink.text.toString()
                     )
-                    downloaderViewModel.insert(history as History)
+                    downloaderViewModel.insert(history)
                 }
             }
-            else -> TODO()
+            else -> false
         }
     }
 

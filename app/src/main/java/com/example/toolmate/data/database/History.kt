@@ -20,6 +20,9 @@ data class History(
     var datedownload: String? = null,
 
     @ColumnInfo(name="thumbnail")
-    var thumbnails: String? = null
+    var thumbnails: String? = null,
+
+    @ColumnInfo(name="downloadlink")
+    var downloadlink: String? = null
 
 ) : Parcelable

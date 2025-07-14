@@ -19,6 +19,10 @@
     <!-- Dialog Save As -->
     <string name="dialog_title">Save As</string>
     <string name="dialog_hint">File Name</string>
+    <!-- Dialog Delete -->
+    <string name="link">Link: </string>
+    <string name="link_download">https://www.example.com</string>
+    <string name="confirmation_delete">Are you sure you want to delete this item history?</string>
     <!-- Top App Bar Menu -->
     <string name="account_menu">Account</string>
     <string name="info_menu">Info</string>
