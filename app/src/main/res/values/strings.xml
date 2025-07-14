@@ -25,15 +25,16 @@
     <string name="confirmation_delete">Are you sure you want to delete this item history?</string>
     <!-- Top App Bar Menu -->
     <string name="account_menu">Account</string>
-    <string name="info_menu">Info</string>
+    <string name="sign_out">Sign Out</string>">
     <!-- Login Menu -->
     <string name="login_welcome">Welcome to Toolmate, Please Login to continue or sign up</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="login">Login</string>
-    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
     <string name="login_continue_as_guset"><u>Continue as Guest</u></string>
-    <string name="logo_welcome">https://i.pinimg.com/originals/2d/99/ae/2d99aefd86eeb076535f1f03d381c712.gif</string>
+    <string name="logo_welcome">https://media.tenor.com/8HfKtIOGnj8AAAAi/lobotomy-corporation.gif</string>
+    <string name="logo_welcome_register">https://img1.picmix.com/output/stamp/normal/4/0/7/8/2598704_a7115.gif</string>
 
 
     <string-array name="data_apps">

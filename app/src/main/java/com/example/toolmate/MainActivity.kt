@@ -1,5 +1,6 @@
 package com.example.toolmate
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.widget.Toast
@@ -9,19 +10,22 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.toolmate.databinding.ActivityMainBinding
+import com.example.toolmate.ui.authentication.LoginActivity
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,11 +47,15 @@ class MainActivity : AppCompatActivity() {
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.account -> {
-                    Toast.makeText(this, "This is Account", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "You are ${auth.uid}", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.info -> {
-                    Toast.makeText(this, "This is Info", Toast.LENGTH_SHORT).show()
+                R.id.sign_out -> {
+                    auth.signOut()
+                    Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                     true
                 }
                 else -> false
