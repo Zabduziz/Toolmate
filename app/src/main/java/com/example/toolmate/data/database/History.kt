@@ -13,6 +13,9 @@ data class History(
     @ColumnInfo(name="id")
     var id: Int = 0,
 
+    @ColumnInfo(name="userid")
+    var userid: String? = null,
+
     @ColumnInfo(name="medianame")
     var medianame: String? = null,
 
@@ -20,6 +23,9 @@ data class History(
     var datedownload: String? = null,
 
     @ColumnInfo(name="thumbnail")
-    var thumbnails: String? = null
+    var thumbnails: String? = null,
+
+    @ColumnInfo(name="downloadlink")
+    var downloadlink: String? = null
 
 ) : Parcelable

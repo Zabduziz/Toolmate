@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.toolmate.R
 import com.example.toolmate.data.adapter.HistoryAdapter
 import com.example.toolmate.data.database.History
 import com.example.toolmate.data.helper.ViewModelFactory
@@ -40,7 +42,7 @@ class HistoryFragment : Fragment() {
 
         adapter.setOnItemClickCallback(object : HistoryAdapter.OnItemClickCallback {
             override fun onItemClicked(history: History) {
-                showDeleteDialog(history, history.medianame.toString())
+                showDeleteDialog(history, history.downloadlink.toString())
             }
         })
 
@@ -79,10 +81,13 @@ class HistoryFragment : Fragment() {
         return ViewModelProvider(this, factory).get(HistoryViewModel::class.java)
     }
 
-    private fun showDeleteDialog(history: History, nameFile: String) {
+    private fun showDeleteDialog(history: History, linkdownload: String) {
+        val view = layoutInflater.inflate(R.layout.dialog_selectable_text, null)
+        val tvLinkText = view.findViewById<TextView>(R.id.tv_link_download)
+        tvLinkText.text = linkdownload
         val dialog = AlertDialog.Builder(requireContext())
             .setTitle("Delete History")
-            .setMessage("Are you sure you want to delete $nameFile history?")
+            .setView(view)
             .setNegativeButton("No") { dialogInterface, _ ->
                 dialogInterface.dismiss()
             }

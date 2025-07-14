@@ -7,5 +7,6 @@ import kotlinx.parcelize.Parcelize
 data class histories(
     val imgMedia: String,
     val nameMedia: String,
-    val dateDownload: String
+    val dateDownload: String,
+    val downloadLink: String
 ): Parcelable

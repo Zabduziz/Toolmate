@@ -2,26 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_container"
+    android:id="@+id/register_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".ui.authentication.RegisterActivity"
     android:orientation="vertical"
-    tools:context=".ui.authentication.LoginActivity"
     android:gravity="center"
     android:fitsSystemWindows="true">
 
     <ImageView
-        android:id="@+id/img_welcome_login"
+        android:id="@+id/img_welcome_register"
         android:layout_width="300dp"
         android:layout_height="300dp"
         tools:srcCompat="@tools:sample/avatars"
         android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/tv_welcome_login"
+        android:id="@+id/tv_welcome_regitser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_welcome"
+        android:text="Please Register to continue"
         android:layout_marginBottom="12dp"
         style="@style/TextAppearance.Material3.BodyMedium"/>
 
@@ -33,7 +33,7 @@
         android:layout_marginBottom="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_email_login"
+            android:id="@+id/et_email_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textUri"
@@ -49,7 +49,7 @@
         android:layout_marginBottom="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_password_login"
+            android:id="@+id/et_password_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -58,49 +58,30 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:id="@+id/button_login_container"
+        android:id="@+id/button_register_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
 
         <Button
-            android:id="@+id/bt_sign_in"
+            android:id="@+id/bt_go_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.Material3.Button.OutlinedButton"
-            android:text="@string/sign_up"
+            android:text="Go back"
             android:layout_marginEnd="16dp"
-            app:icon="@drawable/ic_account"/>
+            app:icon="@drawable/ic_back"/>
 
         <Button
-            android:id="@+id/bt_login"
+            android:id="@+id/bt_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="Register"
             android:layout_marginEnd="6dp"
             app:icon="@drawable/ic_login"/>
 
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_or"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="--- OR ---"
-        style="@style/TextAppearance.Material3.BodyMedium"
-        android:textStyle="italic"
-        android:layout_marginTop="6dp"/>
-
-    <TextView
-        android:id="@+id/tv_continue_as_guest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/login_continue_as_guset"
-        style="@style/TextAppearance.Material3.BodyMedium"
-        android:textStyle="italic"
-        android:layout_marginTop="16dp"/>
 </LinearLayout>
