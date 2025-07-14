@@ -13,6 +13,9 @@ data class History(
     @ColumnInfo(name="id")
     var id: Int = 0,
 
+    @ColumnInfo(name="userid")
+    var userid: String? = null,
+
     @ColumnInfo(name="medianame")
     var medianame: String? = null,
 

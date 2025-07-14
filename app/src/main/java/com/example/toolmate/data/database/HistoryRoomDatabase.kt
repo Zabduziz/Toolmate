@@ -9,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [History::class],
-    version = 2 // New Version include link download
+    version = 3 // New Version include link download
 )
 abstract class HistoryRoomDatabase: RoomDatabase() {
     abstract fun historyDao(): HistoryDao
@@ -19,9 +19,9 @@ abstract class HistoryRoomDatabase: RoomDatabase() {
         private var INSTANCE: HistoryRoomDatabase? = null
 
         // Migration to new Database
-        private val MIGRATION_1_2 = object : Migration(1,2) {
+        private val MIGRATION_2_3 = object : Migration(2,3) {
             override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE history ADD COLUMN downloadlink TEXT")
+                database.execSQL("ALTER TABLE history ADD COLUMN userid TEXT")
             }
         }
 
@@ -33,7 +33,7 @@ abstract class HistoryRoomDatabase: RoomDatabase() {
                         context.applicationContext,
                         HistoryRoomDatabase::class.java,
                         "history_database"
-                    ).addMigrations(MIGRATION_1_2).build() // Add Migration
+                    ).addMigrations(MIGRATION_2_3).build() // Add Migration
                 }
             }
             return INSTANCE as HistoryRoomDatabase

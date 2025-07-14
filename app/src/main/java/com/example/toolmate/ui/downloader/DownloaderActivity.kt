@@ -30,11 +30,13 @@ import com.example.toolmate.data.helper.ViewModelFactory
 import com.example.toolmate.databinding.ActivityDownloaderBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 
 class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDownloaderBinding
     private lateinit var thumbnail: String
     private lateinit var downloaderViewModel: DownloaderViewModel
+    private lateinit var auth: FirebaseAuth
     private var linksDownload = mutableListOf<String>()
 
 
@@ -49,6 +51,8 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityDownloaderBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        auth = FirebaseAuth.getInstance()
 
         val topAppBar: MaterialToolbar = binding.topAppBarDownloader
         setSupportActionBar(topAppBar)
@@ -98,6 +102,7 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
                         downloader.downloadFile(x)
                     }
                     val history = History(
+                        userid = auth.uid,
                         medianame = fileName,
                         datedownload = DateHelper.getCurrentDate(),
                         thumbnails = thumbnail,
