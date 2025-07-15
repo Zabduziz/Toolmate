@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
     implementation("androidx.room:room-runtime:2.7.2")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
     ksp("androidx.room:room-compiler:2.7.2")
 
 }
