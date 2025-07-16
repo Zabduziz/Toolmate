@@ -10,16 +10,24 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.toolmate.MainActivity
 import com.example.toolmate.R
+import com.example.toolmate.data.database.History
+import com.example.toolmate.data.helper.ViewModelFactory
 import com.example.toolmate.databinding.ActivityLoginBinding
+import com.example.toolmate.ui.account.AccountViewModel
 import com.example.toolmate.ui.authentication.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
 
+        loginViewModel = obtainViewModel(this@LoginActivity)
         auth = FirebaseAuth.getInstance()
 
         Glide.with(this@LoginActivity)
@@ -50,9 +59,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btLogin.setOnClickListener {
+            loginViewModel.deleteAllHistory()
             val email = binding.etEmailLogin.text.toString()
             val password = binding.etPasswordLogin.text.toString()
-
             // Email and Password Validation
             if (email.isEmpty()) {
                 binding.etEmailLogin.error = "Email is required"
@@ -96,6 +105,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) {
                 if (it.isSuccessful) {
                     Toast.makeText(this, "Welcome ${auth.currentUser?.uid}", Toast.LENGTH_SHORT).show()
+                    insertAllHistory(auth.currentUser?.uid.toString())
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     startActivity(intent)
@@ -103,6 +113,41 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "${it.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
+            }
+    }
+    private fun obtainViewModel(activity: AppCompatActivity): LoginViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(LoginViewModel::class.java)
+    }
+    private fun insertAllHistory(userid: String) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("history")
+            .whereEqualTo("userid", userid)
+            .get()
+            .addOnSuccessListener { result ->
+                val historyList = mutableListOf<History>()
+                for (document in result) {
+                    val medianame = document.getString("medianame")
+                    val datedownload = document.getString("datedownload")
+                    val downloadlink = document.getString("downloadlink")
+                    val thumbnails = document.getString("thumbnails")
+                    val userid = document.getString("userid")
+
+                    val history = History(
+                        medianame = medianame,
+                        datedownload = datedownload,
+                        downloadlink = downloadlink,
+                        thumbnails = thumbnails,
+                        userid = userid
+                    )
+                    historyList.add(history)
+                }
+                loginViewModel.insertAllHistory(historyList)
+                Log.d("Firestore", "Data inserted successfully")
+                Log.d("Firestore", "Data: $historyList")
+            }
+            .addOnFailureListener { e ->
+                Log.e("Firestore", "Error: ", e)
             }
     }
 }

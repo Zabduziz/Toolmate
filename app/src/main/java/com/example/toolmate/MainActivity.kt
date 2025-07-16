@@ -3,7 +3,6 @@ package com.example.toolmate
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.toolmate.databinding.ActivityMainBinding
-import com.example.toolmate.ui.authentication.LoginActivity
+import com.example.toolmate.ui.account.AccountActivity
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.auth.FirebaseAuth
 
@@ -47,15 +46,8 @@ class MainActivity : AppCompatActivity() {
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.account -> {
-                    Toast.makeText(this, "You are ${auth.uid}", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.sign_out -> {
-                    auth.signOut()
-                    Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, LoginActivity::class.java)
+                    val intent = Intent(this, AccountActivity::class.java)
                     startActivity(intent)
-                    finish()
                     true
                 }
                 else -> false

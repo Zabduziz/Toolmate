@@ -1,7 +1,9 @@
 package com.example.toolmate.ui.downloader
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -31,6 +33,7 @@ import com.example.toolmate.databinding.ActivityDownloaderBinding
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDownloaderBinding
@@ -108,6 +111,19 @@ class DownloaderActivity : AppCompatActivity(), View.OnClickListener {
                         thumbnails = thumbnail,
                         downloadlink = binding.etLink.text.toString()
                     )
+                    val db = FirebaseFirestore.getInstance()
+                    db.collection("history")
+                        .add(history)
+                        .addOnSuccessListener { documentReference ->
+                            val generatedId = documentReference.id
+                            Log.d(TAG, "DocumentSnapshot added with ID: $generatedId")
+                            db.collection("history").document(generatedId)
+                                .update("id", generatedId)
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(TAG, "Error adding document", e)
+                        }
+
                     downloaderViewModel.insert(history)
                 }
             }

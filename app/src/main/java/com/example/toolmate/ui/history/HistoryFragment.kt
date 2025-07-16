@@ -1,10 +1,13 @@
 package com.example.toolmate.ui.history
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +17,7 @@ import com.example.toolmate.data.adapter.HistoryAdapter
 import com.example.toolmate.data.database.History
 import com.example.toolmate.data.helper.ViewModelFactory
 import com.example.toolmate.databinding.FragmentHistoryBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HistoryFragment : Fragment() {
 
@@ -57,6 +61,7 @@ class HistoryFragment : Fragment() {
             if (historyList != null) {
                 adapter.setListHistory(historyList)
             }
+            Log.d("Room Data", "Histories: $historyList")
         }
 
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
@@ -92,6 +97,7 @@ class HistoryFragment : Fragment() {
                 dialogInterface.dismiss()
             }
             .setPositiveButton("Yes") { _, _ ->
+                deleteFromFirestore(history)
                 obtainViewModel().delete(history)
             }
             .create()
@@ -104,7 +110,10 @@ class HistoryFragment : Fragment() {
         builder.setMessage("Delete ${selected.size} items?")
         builder.setPositiveButton("Yes") { _, _ ->
             val vm = obtainViewModel()
-            selected.forEach { vm.delete(it) }
+            selected.forEach {
+                deleteFromFirestore(it)
+                vm.delete(it)
+            }
             adapter.clearSelection()
             updateMultiDeleteUI()
         }
@@ -115,5 +124,23 @@ class HistoryFragment : Fragment() {
     private fun updateMultiDeleteUI() {
         val visible = adapter.getSelectedItem().isNotEmpty()
         binding.fabDeleteSelected.visibility = if (visible) View.VISIBLE else View.GONE
+    }
+
+    private fun deleteFromFirestore(history: History) {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("history")
+            .whereEqualTo("datedownload", history.datedownload)
+            .get()
+            .addOnSuccessListener { querysnapshot ->
+                for (document in querysnapshot) {
+                    db.collection("history")
+                        .document(document.id)
+                        .delete()
+                }
+                Log.d(TAG, "DocumentSnapshot successfully deleted!")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error Finding Document", e)
+            }
     }
 }
