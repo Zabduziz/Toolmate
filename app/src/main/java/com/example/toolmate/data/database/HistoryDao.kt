@@ -17,4 +17,10 @@ interface HistoryDao {
 
     @Delete
     fun delete(history: History)
+
+    @Query("DELETE FROM history")
+    fun deleteAllHistory()
+
+    @Insert(onConflict = OnConflictStrategy.ABORT)
+    fun insertAll(historyList: List<History>)
 }

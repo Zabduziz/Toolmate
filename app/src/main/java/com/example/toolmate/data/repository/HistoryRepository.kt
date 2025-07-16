@@ -22,4 +22,8 @@ class HistoryRepository(application: Application) {
     fun insert(history: History) {executorService.execute { mHistoryDao.insert(history) } }
 
     fun delete(history: History) {executorService.execute { mHistoryDao.delete(history) } }
+
+    fun deleteAllHistory() {executorService.execute { mHistoryDao.deleteAllHistory() }}
+
+    fun insertAll(historyList: List<History>) { mHistoryDao.insertAll(historyList) }
 }

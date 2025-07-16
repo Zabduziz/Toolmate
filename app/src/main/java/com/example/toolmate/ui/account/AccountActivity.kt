@@ -7,7 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.example.toolmate.R
+import com.example.toolmate.data.helper.ViewModelFactory
 import com.example.toolmate.databinding.ActivityAccountBinding
 import com.example.toolmate.ui.authentication.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 class AccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAccountBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var accountViewModel: AccountViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +37,11 @@ class AccountActivity : AppCompatActivity() {
             )
             insets
         }
+        accountViewModel = obtainViewModel(this@AccountActivity)
         binding.tvUsername.text = auth.currentUser?.uid
+        binding.tvEmailUser.text = auth.currentUser?.email
         binding.btLogout.setOnClickListener {
+            accountViewModel.deleteAllHistory()
             auth.signOut()
             Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginActivity::class.java)
@@ -45,5 +51,9 @@ class AccountActivity : AppCompatActivity() {
         binding.btBack.setOnClickListener {
             finish()
         }
+    }
+    private fun obtainViewModel(activity: AppCompatActivity): AccountViewModel {
+        val factory = ViewModelFactory.getInstance(activity.application)
+        return ViewModelProvider(activity, factory).get(AccountViewModel::class.java)
     }
 }

@@ -3,6 +3,8 @@ package com.example.toolmate.data.helper
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.toolmate.ui.account.AccountViewModel
+import com.example.toolmate.ui.authentication.LoginViewModel
 import com.example.toolmate.ui.downloader.DownloaderViewModel
 import com.example.toolmate.ui.history.HistoryViewModel
 
@@ -27,6 +29,10 @@ class ViewModelFactory private constructor(private val mApplication: Application
             return HistoryViewModel(mApplication) as T
         } else if (modelClass.isAssignableFrom(DownloaderViewModel::class.java)) {
             return DownloaderViewModel(mApplication) as T
+        } else if (modelClass.isAssignableFrom(AccountViewModel::class.java)) {
+            return AccountViewModel(mApplication) as T
+        } else if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+            return LoginViewModel(mApplication) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }
