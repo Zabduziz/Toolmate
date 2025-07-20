@@ -1,4 +1,26 @@
-# ToolMate: Media Downloader for Android
+<div align="center">
+
+<img width="" src="imgSrc\logo.png"  width=160 height=160  align="center">
+
+# ToolMate
+
+</div>
+
+# 📱 Screenshots
+
+<div align="center">
+<div>
+<img src="imgSrc/login.png" width="30%" />
+<img src="imgSrc/register.png" width="30%" />
+<img src="imgSrc/home.png" width="30%" />
+<img src="imgSrc/history.png" width="30%" />
+<img src="imgSrc/downloader.png" width="30%" />
+<img src="imgSrc/delete.png" width="30%" />
+</div>
+</div>
+<hr>
+ 
+# Media Downloader for Android
 
 ToolMate adalah sebuah aplikasi Android yang dirancang untuk menjadi solusi terpusat dalam mengunduh konten media dari berbagai platform sosial populer. Proyek ini dibangun sepenuhnya secara *native* menggunakan Kotlin dan menerapkan prinsip-prinsip pengembangan Android modern. Dibuat sebagai proyek pribadi untuk tujuan pembelajaran dan eksplorasi.
 
