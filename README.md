@@ -6,7 +6,7 @@
 
 </div>
 
-# 📱 Screenshots
+# Screenshots
 
 <div align="center">
 <div>
@@ -24,7 +24,7 @@
 
 ToolMate adalah sebuah aplikasi Android yang dirancang untuk menjadi solusi terpusat dalam mengunduh konten media dari berbagai platform sosial populer. Proyek ini dibangun sepenuhnya secara *native* menggunakan Kotlin dan menerapkan prinsip-prinsip pengembangan Android modern. Dibuat sebagai proyek pribadi untuk tujuan pembelajaran dan eksplorasi.
 
-## ✨ Fitur Utama
+## Fitur Utama
 
 -   **Dukungan Multi-Platform**: Unduh video dan gambar dari platform seperti YouTube, Instagram, TikTok, Twitter, Facebook, Threads, SnackVideo, dan Bstation.
 -   **Pratinjau Media**: Lihat *thumbnail*, judul, dan detail media lainnya sebelum memutuskan untuk mengunduh.
@@ -33,7 +33,7 @@ ToolMate adalah sebuah aplikasi Android yang dirancang untuk menjadi solusi terp
 -   **Manajemen Riwayat**: Hapus riwayat unduhan satu per satu atau beberapa sekaligus (*bulk delete*).
 -   **UI Modern & Simpel**: Antarmuka yang bersih dan intuitif dibangun dengan Material Design 3.
 
-## 🛠️ Teknologi & Arsitektur
+## Teknologi & Arsitektur
 
 Proyek ini dibangun dengan *tech stack* yang relevan dengan industri saat ini:
 
@@ -49,7 +49,7 @@ Proyek ini dibangun dengan *tech stack* yang relevan dengan industri saat ini:
 -   **Image Loading**: **Glide** untuk memuat *thumbnail* gambar secara efisien.
 -   **Dependency Management**: **Gradle** dengan **Version Catalog** (`libs.versions.toml`).
 
-## ⚙️ Cara Kerja
+## Cara Kerja
 
 1.  **Input URL**: Pengguna memilih platform dari *dashboard* dan memasukkan URL media yang ingin diunduh.
 2.  **Fetching Media**: Aplikasi menggunakan *class* `MediaFetcher` yang spesifik untuk setiap platform (misal: `YoutubeMediaFetcher`).
@@ -58,7 +58,7 @@ Proyek ini dibangun dengan *tech stack* yang relevan dengan industri saat ini:
 5.  **Proses Unduh**: Saat pengguna menekan tombol *download*, aplikasi menggunakan `DownloadManager` bawaan Android untuk mengunduh file di *background* secara andal.
 6.  **Simpan Riwayat**: Informasi unduhan (nama file, tanggal, thumbnail) disimpan ke database Room lokal dan disinkronkan ke koleksi Firestore pengguna.
 
-## 🚀 Cara Menjalankan Proyek
+## Cara Menjalankan Proyek
 
 1.  **Clone Repository**
     ```bash
@@ -77,6 +77,6 @@ Proyek ini dibangun dengan *tech stack* yang relevan dengan industri saat ini:
 4.  **Build & Run**
     -   Jalankan aplikasi pada emulator atau perangkat Android fisik.
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 Aplikasi ini dibuat untuk **tujuan edukasi dan pembelajaran saja**. Pengguna bertanggung jawab penuh atas konten yang diunduh. Jangan gunakan aplikasi ini untuk aktivitas yang melanggar hak cipta atau ilegal.
