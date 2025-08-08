@@ -62,7 +62,7 @@ Proyek ini dibangun dengan *tech stack* yang relevan dengan industri saat ini:
 
 1.  **Clone Repository**
     ```bash
-    git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+    git clone https://github.com/Zabduziz/Toolmate.git
     ```
 2.  **Buka di Android Studio**
     -   Impor proyek ke Android Studio. Biarkan Gradle melakukan *sync*.
